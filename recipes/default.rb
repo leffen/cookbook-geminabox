@@ -1,9 +1,25 @@
+
+
+# Create group
+group node[:geminabox][:www_group] do
+  action :create
+end
+
+# Create user
+user node[:geminabox][:www_user] do
+  comment "Gem in a box service user"
+  group node[:geminabox][:www_group]
+  system true
+  action :create
+end
+
 # Ensure our directories exist
 directory node[:geminabox][:config_directory] do
   action :create
   recursive true
   mode '0755'
 end
+
 
 directory File.join(node[:geminabox][:base_directory], node[:geminabox][:data_directory]) do
   action :create
