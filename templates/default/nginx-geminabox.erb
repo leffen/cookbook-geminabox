@@ -2,7 +2,15 @@ upstream unicorn {
   server unix:<%= @socket %> fail_timeout=0;
 }
 server {
-  listen 80;
+  listen <%= @nginx_port %>;
+
+    <% if @server_name %>
+    server_name <%= @server_name %>;
+
+    access_log /var/log/nginx/<%= @server_name %>.access.log;
+    error_log /var/log/nginx/<%= @server_name %>.error.log;
+   <% end %>
+
   <% if @ssl %>
   location / {
     rewrite ^/(.*)$ https://$host/$1 redirect;

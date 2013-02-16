@@ -9,6 +9,7 @@ default[:geminabox][:build_legacy] = false
 default[:geminabox][:auth_required] = false
 # sys configs
 default[:geminabox][:www_user] = 'www-data'
+default[:geminabox][:www_group] = 'www-data'
 # ssl configs
 default[:geminabox][:ssl][:enabled] = false
 # unicorn configs
@@ -25,5 +26,7 @@ default[:geminabox][:unicorn][:maxcpu] = 20
 default[:geminabox][:unicorn][:exec] = '/usr/bin/unicorn'
 # nginx configs
 default[:geminabox][:nginx] = Mash.new
+default[:geminabox][:nginx][:port] = '80'
+
 # bluepill configs
 default[:geminabox][:bluepill] = Mash.new

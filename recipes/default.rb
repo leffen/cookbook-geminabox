@@ -1,14 +1,16 @@
 
+group = node[:geminabox][:www_group] || node[:geminabox][:www_user]
+
 
 # Create group
-group node[:geminabox][:www_group] do
+group group do
   action :create
 end
 
 # Create user
 user node[:geminabox][:www_user] do
   comment "Gem in a box service user"
-  group node[:geminabox][:www_group]
+  group group
   system true
   action :create
 end
@@ -54,7 +56,8 @@ template File.join(node[:geminabox][:base_directory], 'config.ru') do
   source 'config.ru.erb'
   variables(
     :geminabox_data_directory => File.join(node[:geminabox][:base_directory], node[:geminabox][:data_directory]),
-    :geminabox_build_legacy => node[:geminabox][:build_legacy]
+    :geminabox_build_legacy => node[:geminabox][:build_legacy],
+    :nginx_port => node[:geminabox][:nginx][:port]
   )
   mode '0644'
   notifies :restart, 'service[geminabox]'
