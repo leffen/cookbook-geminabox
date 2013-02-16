@@ -13,7 +13,7 @@ end
 after_fork do |one,two|
   if(Process.euid == 0)
     require 'fileutils'
-    worker.user('<%= @www_user %>', '<%= @www_user %>')
-    FileUtils.chown('<%= @www_user %>', '<%= @www_user %>', '<%= @socket %>')
+    worker.user('<%= @www_user %>', '<%= @www_group %>')
+    FileUtils.chown('<%= @www_user %>', '<%= @www_group %>', '<%= @socket %>')
   end
 end
