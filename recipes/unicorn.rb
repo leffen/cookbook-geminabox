@@ -9,10 +9,12 @@ node.default[:unicorn][:preload_app] = true
 node.default[:unicorn][:worker_processes] = [node[:cpu][:total].to_i * 4, 8].min
 node.default[:unicorn][:preload_app] = false
 node.default[:unicorn][:before_fork] = 'sleep 1'
-node.default[:unicorn][:port] = 'unix:/' + File.join(node[:geminabox][:base_directory], 'unicorn.socket')
+node.default[:unicorn][:port]  = "\"unix:/#{File.join(node[:geminabox][:base_directory], 'unicorn.socket')}\""
 node.default[:unicorn][:options] = { :tcp_nodelay => true, :backlog => 100 }
 
-unicorn_config File.join(node[:geminabox][:config_directory], 'geminabox.unicorn.app') do
+unicorn_config 'geminabox.unicorn.app' do
+  # File.join(node[:geminabox][:config_directory], 'geminabox.unicorn.app')
+  # config_directory node[:geminabox][:unicorn][:config_directory]
   listen node[:unicorn][:port] => node[:unicorn][:options]
   worker_processes node[:geminabox][:unicorn][:workers] || 2
   worker_timeout node[:geminabox][:unicorn][:timeout] || 30

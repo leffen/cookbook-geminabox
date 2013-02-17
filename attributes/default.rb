@@ -19,11 +19,11 @@ default[:geminabox][:unicorn][:version] = '> 0'
 default[:geminabox][:unicorn][:cow_friendly] = true
 default[:geminabox][:unicorn][:timeout] = 30
 default[:geminabox][:unicorn][:workers] = 2
-default[:geminabox][:unicorn][:process_user] = default[:geminabox][:www_user]
-default[:geminabox][:unicorn][:process_group] = default[:geminabox][:www_user]
 default[:geminabox][:unicorn][:maxmemory] = 50
 default[:geminabox][:unicorn][:maxcpu] = 20
-default[:geminabox][:unicorn][:exec] = '/usr/bin/unicorn'
+default[:geminabox][:unicorn][:exec] = '/usr/local/bin/unicorn'
+default[:geminabox][:unicorn][:config_dir] = '/etc/unicorn'
+
 # nginx configs
 default[:geminabox][:nginx] = Mash.new
 default[:geminabox][:nginx][:port] = '80'

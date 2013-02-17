@@ -4,6 +4,7 @@ gem_package('red_unicorn') do
   action :install
 end
 
+
 template '/etc/init/geminabox.conf' do
   source 'upstart-geminabox-bluepill.erb'
   variables(
@@ -19,14 +20,16 @@ template '/etc/bluepill/geminabox.pill' do
     :pid => File.join(node[:geminabox][:base_directory], 'unicorn.pid'),
     :working_directory => node[:geminabox][:base_directory],
     :exec => node[:geminabox][:unicorn][:exec],
-    :config => File.join(node[:geminabox][:config_directory], 'geminabox.unicorn.app'),
-    :process_user => node[:geminabox][:unicorn][:process_user],
-    :process_group => node[:geminabox][:unicorn][:process_group],
+    :config => File.join(node[:geminabox][:unicorn][:config_dir], 'geminabox.unicorn.app.rb'),
+    :process_user => node[:geminabox][:unicorn][:www_user],
+    :process_group => node[:geminabox][:unicorn][:www_group],
     :maxmemory => node[:geminabox][:unicorn][:maxmemory],
     :maxcpu => node[:geminabox][:unicorn][:maxcpu]
   )
   notifies :restart, 'service[geminabox]'
 end
+
+
 
 service 'geminabox' do
   provider Chef::Provider::Service::Upstart

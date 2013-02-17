@@ -1,7 +1,6 @@
 
 group = node[:geminabox][:www_group] || node[:geminabox][:www_user]
 
-
 # Create group
 group group do
   action :create
@@ -10,9 +9,21 @@ end
 # Create user
 user node[:geminabox][:www_user] do
   comment "Gem in a box service user"
+  home "/home/#{node[:geminabox][:www_user]}"
+  shell "/bin/bash"
   group group
   system true
   action :create
+end
+
+
+# Ensure our directories exist
+directory node[:geminabox][:www_user] do
+  action :create
+  recursive true
+  owner node[:geminabox][:www_user]
+  group node[:geminabox][:www_group]
+  mode '0755'
 end
 
 # Ensure our directories exist
