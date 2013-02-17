@@ -7,6 +7,8 @@ default[:geminabox][:data_directory] = 'data' # This values is joined to base_di
 default[:geminabox][:build_legacy] = false
 # auth configs
 default[:geminabox][:auth_required] = false
+default[:geminabox][:auth_type] = 0 # 0 - no auth, 1 - use existing auth file, 2 - use provided hash , oh yeah magic numbers
+
 # sys configs
 default[:geminabox][:www_user] = 'www-data'
 default[:geminabox][:www_group] = 'www-data'

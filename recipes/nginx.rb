@@ -23,7 +23,7 @@ if(geminabox_key && geminabox_cert)
 end
 
 if(node[:geminabox][:auth_required])
-  if(node[:geminabox][:auth_required].is_a?(String))
+  if(node[:geminabox][:auth_type] == '1')
     if(File.exists?(node[:geminabox][:auth_required]))
       htpasswd_file = node[:geminabox][:auth_required]
     else
@@ -32,7 +32,7 @@ if(node[:geminabox][:auth_required])
       end
       geminabox_auth = File.join(node[:nginx][:dir], 'geminabox.htpasswd')
     end
-  elsif(node[:geminabox][:auth_required].is_a?(Hash)) # generate file
+  elsif(node[:geminabox][:auth_type] == '2') # generate file
     require 'webrick/httpauth'
     require 'tempfile'
     tmp = Tempfile.new('geminabox')
