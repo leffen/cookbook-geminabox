@@ -25,6 +25,7 @@ default[:geminabox][:unicorn][:maxmemory] = 50
 default[:geminabox][:unicorn][:maxcpu] = 20
 default[:geminabox][:unicorn][:exec] = '/usr/local/bin/unicorn'
 default[:geminabox][:unicorn][:config_dir] = '/etc/unicorn'
+default[:geminabox][:unicorn][:log_dir]='/var/log'
 
 # nginx configs
 default[:geminabox][:nginx] = Mash.new
