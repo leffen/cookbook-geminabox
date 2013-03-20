@@ -4,6 +4,10 @@ working_directory "<%= @base_path %>"
 listen "<%= @socket %>"
 timeout <%= @timeout %>
 pid "<%= File.join(@base_path, 'unicorn.pid') %>"
+
+stderr_path "<%= @log_dir %>/geminabox_unicorn_error.log"
+stdout_path "<%= @log_dir %>/geminabox_unicorn.log"
+
 preload_app true
 
 if(GC.respond_to?(:copy_on_write_friendly=))
