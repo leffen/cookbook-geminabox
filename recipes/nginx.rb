@@ -65,7 +65,7 @@ template File.join('/', 'etc', 'nginx', 'sites-available', 'geminabox') do
     :ssl_cert => geminabox_cert,
     :ssl_key => geminabox_key,
     :auth_file => geminabox_auth,
-    :server_name => node[:geminabox][:server_name],
+    :server_name => node[:geminabox][:nginx][:server_name],
     :nginx_port => node[:geminabox][:nginx][:port]|| "80"
   )
   mode '0644'
