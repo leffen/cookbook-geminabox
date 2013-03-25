@@ -19,12 +19,11 @@ template '/etc/bluepill/geminabox.pill' do
   variables(
     :pid => File.join(node[:geminabox][:base_directory], 'unicorn.pid'),
     :working_directory => node[:geminabox][:base_directory],
-    :exec => node[:geminabox][:unicorn][:exec],
-    :config => File.join(node[:geminabox][:unicorn][:config_dir], 'geminabox.unicorn.app.rb'),
-    :process_user => node[:geminabox][:unicorn][:www_user],
-    :process_group => node[:geminabox][:unicorn][:www_group],
-    :maxmemory => node[:geminabox][:unicorn][:maxmemory],
-    :maxcpu => node[:geminabox][:unicorn][:maxcpu]
+    :config => File.join(node[:geminabox][:thin][:config_dir], 'thin_config.yml'),
+    :process_user => node[:geminabox][:www_user],
+    :process_group => node[:geminabox][:www_group],
+    :maxmemory => node[:geminabox][:thin][:maxmemory],
+    :maxcpu => node[:geminabox][:thin][:maxcpu]
   )
   notifies :restart, 'service[geminabox]'
 end

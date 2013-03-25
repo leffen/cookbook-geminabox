@@ -1,0 +1,14 @@
+pid: <%= @pid %>
+address: 0.0.0.0
+timeout: 30
+wait: 30
+port: <%= @port %>
+log: <%= @log_dir %>/thin.log
+max_conns: 1024
+require: []
+
+environment: production
+max_persistent_conns: 512
+server: 4
+daemonize: true
+chdir: <%= @base_directory %>

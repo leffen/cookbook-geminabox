@@ -63,6 +63,7 @@ if(node[:geminabox][:unicorn] || :this_is_all_we_support)
   include_recipe 'geminabox::unicorn'
 end
 
+
 template File.join(node[:geminabox][:base_directory], 'config.ru') do
   source 'config.ru.erb'
   variables(
